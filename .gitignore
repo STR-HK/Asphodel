@@ -1,0 +1,19 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Private Things
+private/**
+!private/private_things.txt
+
+# Large Assets
+assets/taskmgr/**
+assets/thumbnail/**
+
+# Temp Files
+assets/Temp
+
+# Allow Example Files
+!assets/taskmgr/video.mp4
+!assets/thumbnail/thumbnail.jpg
