@@ -1,12 +1,13 @@
 import asyncio
 from Asphodel import app
 
-f = open('./assets/tags/Tags.txt','r',encoding='utf-8').read()
+f = open("./assets/tags/Tags.txt", "r", encoding="utf-8").read()
 import json
+
 Tags = json.loads(f)
 Names = list()
 for tag in Tags:
-    Names.append(tag['Name'])
+    Names.append(tag["Name"])
 
 # @app.get('/tags/autocomplete/{fewletter}')
 # async def tags_autocomplete(fewletter: str):
@@ -14,18 +15,21 @@ for tag in Tags:
 #     for Name in Names:
 #         if Name[:len(fewletter)] == fewletter:
 #             result.append(Name)
-#     return result
+#     return results
 
-@app.get('/tags/list')
+
+@app.get("/tags/list")
 async def tags_list():
-    return Tags
+    return {"detail": Tags}
 
-@app.get('/tags/detail/{name}')
+
+@app.get("/tags/detail/{name}")
 async def tags_detail(name: str):
     for N, Name in enumerate(Names):
         if Name == name:
-            return Tags[N]
+            return {"detail": Tags[N]}
 
-@app.get('/tags/namelist')
+
+@app.get("/tags/namelist")
 async def tags_namelist():
-    return Names
+    return {"detail": Names}
