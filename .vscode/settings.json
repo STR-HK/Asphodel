@@ -1,7 +1,0 @@
-{
-    "python.formatting.provider": "black",
-    "material-icon-theme.folders.associations": {
-        "Thumbnails": "Images"
-    }
-}
-
