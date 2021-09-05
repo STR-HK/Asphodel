@@ -5,20 +5,40 @@ app = FastAPI(
     title="Asphodel API Project", description="It's all yours.", version="alpha 0.1"
 )
 
-
 @app.get("/")
 async def root():
     return {"detail": "I'm all yours."}
 
-
 import os
 
-for module in os.listdir("./modules"):
-    print(module)
-    if module != "__pycache__":
-        __import__("modules.{}".format(module[:-3]))
+# from modules.certificate.token import auth
 
-# import modules.token
+for root, dirs, files in os.walk("./modules"):
+    if not '__pycache__' in root:
+        for file in files:
+            root = root.replace('\\','/')
+            path = f'{root}/{file}'
+
+            module = path.removeprefix('./').replace('/','.').removesuffix('.py')
+            print(module)
+            __import__(module)
+
+from uvicorn.supervisors.watchgodreload import CustomWatcher
+
+ignored = {
+    "database",
+    "generator",
+}
+
+class WatchgodWatcher(CustomWatcher):
+    def __init__(self, *args, **kwargs):
+        self.ignored_dirs.update(ignored)
+        super(WatchgodWatcher, self).__init__(*args, **kwargs)
+
+uvicorn.supervisors.watchgodreload.CustomWatcher = WatchgodWatcher
+
+import sys
 
 if __name__ == "__main__":
-    uvicorn.run("Asphodel:app", host="192.168.0.2", port=7474)
+    sys.path.insert(0, os.path.abspath("/app"))
+    uvicorn.run("Asphodel:app", host="192.168.0.2", port=7474, reload=True)

@@ -8,8 +8,11 @@ private/**
 !private/private_things.txt
 
 # Large Assets
-assets/taskmgr/**
-assets/thumbnail/**
+# assets/taskmgr/**
+# assets/thumbnail/**
+import/resources/**
+client/Web/ref/**
+assets/**
 
 # Temp Files
 assets/Temp

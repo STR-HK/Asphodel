@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'Cambria';
+    src: url('../assets/font/Cambria.woff') format('woff');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: url('../assets/font/Ubuntu.woff') format('woff');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../assets/font/Roboto.woff') format('woff');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Medium';
+    src: url('../assets/font/Roboto-Medium.woff') format('woff');
+    font-weight: normal;
+}
+
