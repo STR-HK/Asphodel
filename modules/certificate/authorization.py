@@ -15,30 +15,39 @@ class AuthDBInterface():
         pass
 
     def isTokenExists(self, token):
+        # print(f'isTokenExists {AuthDB.select(table_name="auth", field_names=["token"], condition=f"token = "{token}"")}')
+        # print()
+        a = AuthDB.select(table_name='auth', field_names=['token'], condition=f"token = '{token}'")
+        print(f'isTokenExists -> {a}')
         if AuthDB.select(table_name='auth', field_names=['token'], condition=f"token = '{token}'"):
             return True
         else:
             return False
     
     def isExpireExists(self, token):
+        print('isExpireExists')
         if AuthDB.select(table_name='auth', field_names=['expire'], condition=f"token = '{token}'")[0][0]:
             return True
         else:
             return False
     
     def isForever(self, token):
+        print('isForever')
         if AuthDB.select(table_name='auth', field_names=['forever'], condition=f"token = '{token}'")[0][0] == 1:
             return True
         else:
             return False
     
     def getExpire(self, token):
+        print('getExpire')
         return AuthDB.select(table_name='auth', field_names=['expire'], condition=f"token = '{token}'")[0][0]
     
     def deleteRow(self, token):
+        print('deleteRow')
         AuthDB.delete(table_name='auth', condition=f"token = '{token}'")
     
     def isTokenValid(self, token):
+        print('isTokenValid')
         now = datetime.now()
         expire = datetime.strptime(self.getExpire(token), "%Y-%m-%d %H:%M:%S.%f")
     
@@ -49,6 +58,7 @@ class AuthDBInterface():
             return False
     
     def getTokenSub(self, token):
+        print('getTokenSub')
         now = datetime.now()
         expire = datetime.strptime(self.getExpire(token), "%Y-%m-%d %H:%M:%S.%f")
     
@@ -56,9 +66,11 @@ class AuthDBInterface():
         return subtracted
     
     def updateExpire(self, expire, token):
+        print('updateExpire')
         AuthDB.update(table_name='auth', values={'expire':expire}, condition=f"token = '{token}'")
 
     def save(self):
+        print('save')
         AuthDB.save()
 
 

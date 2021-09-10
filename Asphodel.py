@@ -2,16 +2,16 @@ import uvicorn
 from fastapi import FastAPI
 
 app = FastAPI(
-    title="Asphodel API Project", description="It's all yours.", version="alpha 0.1"
+    title="Asphodel API Project", description="It's all yours.", version="Alpha 0.2"
 )
 
-@app.get("/")
+@app.get("/", tags=["Root"])
 async def root():
     return {"detail": "I'm all yours."}
 
 import os
 
-# from modules.certificate.token import auth
+from modules.certificate.authorization import auth
 
 for root, dirs, files in os.walk("./modules"):
     if not '__pycache__' in root:

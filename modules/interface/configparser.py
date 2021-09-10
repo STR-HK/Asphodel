@@ -15,11 +15,11 @@ class TextDatabase():
     def execute(self, query : str, params : list = None) -> list or None:
         try:
             response = self.cursor.execute(query) if params is None else self.cursor.execute(query, params)
-            print(query, os.path.basename(__file__), ':', 'executed!')
         except Exception as e:
             print(query, os.path.basename(__file__), ':', e)
             return
 
+        print(f'Execute : {query}-> {response.fetchall()}')
         return response.fetchall()
 
     def select(self, table_name : str, field_names : list or str, condition : str = None, order : str = None) -> list:
@@ -75,9 +75,9 @@ class TextDatabase():
 
 
 # db = TextDatabase()
-# db.connect('./database/bull.db')
+# db.connect('./database/auth.db')
 # db.create_table_if_not_exists(table_name='bull_table', fields=['a','b','c'])
-# db.insert(table_name='bull_table', values={'a':'입력된 값', 'b':'베타 베타'})
+# db.insert(table_name='auth', values={'token':'gamma'})
 # db.update(table_name='bull_table', values={'a':'변경된 에이 값'}, condition="a = '입력된 값'")
 # db.delete(table_name='bull_table', condition="a = '변경된 에이 값'")
 # db.save()
